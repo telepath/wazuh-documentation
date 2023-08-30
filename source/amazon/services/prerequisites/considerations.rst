@@ -2,7 +2,7 @@
 
 .. meta::
   :description: Learn about some considerations that must be taken into account when configuring the Wazuh module for AWS.
-  
+
 .. _amazon_considerations:
 
 Considerations for configuration
@@ -36,7 +36,7 @@ Reparse
 -------
 
 .. warning::
-  
+
    Using the ``reparse`` option will fetch and process all the logs from the starting date until the present. This process may generate duplicate alerts.
 
 To fetch and process older logs, you need to manually run the module using the ``--reparse`` option.
@@ -62,7 +62,7 @@ Users can customize two retry configurations.
 -  ``retry_mode``: legacy, standard, and adaptive.
 
    -  **Legacy** mode is the default retry mode. It sets the older version 1 for the retry handler. This includes:
-      
+
       -  Retry attempts for a limited number of errors/exceptions.
       -  A default value of 5 for maximum call attempts.
 
@@ -131,13 +131,6 @@ Below there is an example of different services configuration:
       <aws_profile>dev</aws_profile>
     </bucket>
 
-    <!-- CloudTrail, authentication with hardcoded keys (not recommended), without 'path' tag -->
-    <bucket type="cloudtrail">
-      <name>wazuh-cloudtrail</name>
-      <access_key>XXXXXXXXXX</access_key>
-      <secret_key>XXXXXXXXXX</secret_key>
-    </bucket>
-
     <!-- CloudTrail, 'gov1' profile, and 'us-gov-east-1' GovCloud region -->
     <bucket type="cloudtrail">
       <name>wazuh-aws-wodle</name>
@@ -182,9 +175,8 @@ The `service_endpoint` and `sts_endpoint` tags can be used to specify the VPC en
     </bucket>
 
     <bucket type="cloudtrail">
+      <aws_profile>default</aws_profile>
       <name>wazuh-cloudtrail-2</name>
-      <access_key>xxxxxx</access_key>
-      <secret_key>xxxxxx</secret_key>
       <iam_role_arn>arn:aws:iam::xxxxxxxxxxx:role/wazuh-role</iam_role_arn>
       <sts_endpoint>xxxxxx.sts.us-east-2.vpce.amazonaws.com</sts_endpoint>
       <service_endpoint>https://bucket.xxxxxx.s3.us-east-2.vpce.amazonaws.com</service_endpoint>
@@ -222,11 +214,11 @@ The following is an example of a valid configuration.
     </service>
 
   </wodle>
-  
-  
-Enabling dashboard visualization  
+
+
+Enabling dashboard visualization
 --------------------------------
-  
+
 You can activate the corresponding Security Information Management module on the Wazuh Dashboard. This module provides additional details and insights about events, as shown in the screenshots below.
 
     .. thumbnail:: /images/aws/aws-dashboard.png
@@ -250,4 +242,3 @@ To activate the **Amazon AWS** module, navigate to your Wazuh Dashboard and clic
        :width: 80%
 
 For further information, please refer to the `modules <https://documentation.wazuh.com/current/user-manual/wazuh-dashboard/settings.html#modules>`_ section.
-
