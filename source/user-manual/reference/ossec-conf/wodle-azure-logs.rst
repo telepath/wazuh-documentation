@@ -2,7 +2,7 @@
 
 .. meta::
   :description: Find out the configuration options of the azure-logs wodle. Learn more about it in this section of the Wazuh documentation.
-  
+
 .. _wodle_azure_logs:
 
 wodle name="azure-logs"
@@ -29,8 +29,6 @@ Options
 - `time`_
 - `timeout`_
 - `log_analytics`_
-- `log_analytics\\application_id`_
-- `log_analytics\\application_key`_
 - `log_analytics\\auth_path`_
 - `log_analytics\\tenantdomain`_
 - `log_analytics\\request`_
@@ -39,8 +37,6 @@ Options
 - `log_analytics\\request\\workspace`_
 - `log_analytics\\request\\timeout`_
 - `log_analytics\\request\\time_offset`_
-- `graph\\application_id`_
-- `graph\\application_key`_
 - `graph\\auth_path`_
 - `graph\\tenantdomain`_
 - `graph\\request`_
@@ -48,8 +44,6 @@ Options
 - `graph\\request\\query`_
 - `graph\\request\\timeout`_
 - `graph\\request\\time_offset`_
-- `storage\\account_name`_
-- `storage\\account_key`_
 - `storage\\auth_path`_
 - `storage\\tag`_
 - `storage\\container`_
@@ -76,10 +70,6 @@ Options
 +----------------------------------------+----------------------------------------------+
 | `log_analytics`_                       | N/A                                          |
 +----------------------------------------+----------------------------------------------+
-| `log_analytics\\application_id`_       | Any string                                   |
-+----------------------------------------+----------------------------------------------+
-| `log_analytics\\application_key`_      | Any string                                   |
-+----------------------------------------+----------------------------------------------+
 | `log_analytics\\auth_path`_            | File path                                    |
 +----------------------------------------+----------------------------------------------+
 | `log_analytics\\tenantdomain`_         | Any string                                   |
@@ -98,10 +88,6 @@ Options
 +----------------------------------------+----------------------------------------------+
 | `graph`_                               | N/A                                          |
 +----------------------------------------+----------------------------------------------+
-| `graph\\application_id`_               | Any string                                   |
-+----------------------------------------+----------------------------------------------+
-| `graph\\application_key`_              | Any string                                   |
-+----------------------------------------+----------------------------------------------+
 | `graph\\auth_path`_                    | File path                                    |
 +----------------------------------------+----------------------------------------------+
 | `graph\\tenantdomain`_                 | Any string                                   |
@@ -117,10 +103,6 @@ Options
 | `graph\\request\\time_offset`_         | A positive number + suffix                   |
 +----------------------------------------+----------------------------------------------+
 | `storage`_                             | N/A                                          |
-+----------------------------------------+----------------------------------------------+
-| `storage\\account_name`_               | Any string                                   |
-+----------------------------------------+----------------------------------------------+
-| `storage\\account_key`_                | Any string                                   |
 +----------------------------------------+----------------------------------------------+
 | `storage\\auth_path`_                  | File path                                    |
 +----------------------------------------+----------------------------------------------+
@@ -248,8 +230,6 @@ Defines the use of the Azure Log Analytics REST API to get the desired logs.
 
 This block configures the integration with Azure Log Analytics REST API.
 
-- `log_analytics\\application_id`_
-- `log_analytics\\application_key`_
 - `log_analytics\\auth_path`_
 - `log_analytics\\tenantdomain`_
 - `log_analytics\\request`_
@@ -257,10 +237,6 @@ This block configures the integration with Azure Log Analytics REST API.
 +----------------------------------------+----------------------------------------------+
 | Options                                | Allowed values                               |
 +========================================+==============================================+
-| `log_analytics\\application_id`_       | Any string                                   |
-+----------------------------------------+----------------------------------------------+
-| `log_analytics\\application_key`_      | Any string                                   |
-+----------------------------------------+----------------------------------------------+
 | `log_analytics\\auth_path`_            | File path                                    |
 +----------------------------------------+----------------------------------------------+
 | `log_analytics\\tenantdomain`_         | Any string                                   |
@@ -268,32 +244,10 @@ This block configures the integration with Azure Log Analytics REST API.
 | `log_analytics\\request`_              | N/A                                          |
 +----------------------------------------+----------------------------------------------+
 
-log_analytics\\application_id
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Identifier of the application that we will use for the authentication and to be able to use the Azure Log Analytics API. It must be used next to the ``application_key`` option obligatorily. Incompatible with ``auth_path`` option.
-
-+--------------------+--------------------+
-| **Default value**  | N/A                |
-+--------------------+--------------------+
-| **Allowed values** | Any string         |
-+--------------------+--------------------+
-
-log_analytics\\application_key
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Key to the application we will use for authentication and to be able to use the Azure Log Analytics API. It must be used next to the ``application_id`` option obligatorily. Incompatible with ``auth_path`` option.
-
-+--------------------+--------------------+
-| **Default value**  | N/A                |
-+--------------------+--------------------+
-| **Allowed values** | Any string         |
-+--------------------+--------------------+
-
 log_analytics\\auth_path
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Path of the file that contains the application identifier and the application key for authentication in order to use the Azure Log Analytics API. Incompatible with ``application_id`` and ``application_key`` options.
+Path of the file that contains the application identifier and the application key for authentication in order to use the Azure Log Analytics API.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -420,8 +374,7 @@ Example of log_analytics configuration
 
         <log_analytics>
 
-            <application_id>8b7...c14</application_id>
-            <application_key>w22...91x</application_key>
+            <auth_path>/var/ossec/wodles/azure/credentials</auth_path>
             <tenantdomain>wazuh.onmicrosoft.com</tenantdomain>
 
             <request>
@@ -441,8 +394,6 @@ graph
 
 This block configures the integration with Azure Active Directory Graph REST API.
 
-- `graph\\application_id`_
-- `graph\\application_key`_
 - `graph\\auth_path`_
 - `graph\\tenantdomain`_
 - `graph\\request`_
@@ -450,10 +401,6 @@ This block configures the integration with Azure Active Directory Graph REST API
 +----------------------------------+----------------------------------------------+
 | Options                          | Allowed values                               |
 +==================================+==============================================+
-| `graph\\application_id`_         | Any string                                   |
-+----------------------------------+----------------------------------------------+
-| `graph\\application_key`_        | Any string                                   |
-+----------------------------------+----------------------------------------------+
 | `graph\\auth_path`_              | File path                                    |
 +----------------------------------+----------------------------------------------+
 | `graph\\tenantdomain`_           | Any string                                   |
@@ -461,32 +408,10 @@ This block configures the integration with Azure Active Directory Graph REST API
 | `graph\\request`_                | N/A                                          |
 +----------------------------------+----------------------------------------------+
 
-graph\\application_id
-^^^^^^^^^^^^^^^^^^^^^
-
-Identifier of the application that we will use for the authentication and to be able to use the AAD Graph API. It must be used next to the ``application_key`` option obligatorily. Incompatible with ``auth_path`` option.
-
-+--------------------+--------------------+
-| **Default value**  | N/A                |
-+--------------------+--------------------+
-| **Allowed values** | Any string         |
-+--------------------+--------------------+
-
-graph\\application_key
-^^^^^^^^^^^^^^^^^^^^^^
-
-Key to the application we will use for authentication and to be able to use the AAD Graph API. It must be used next to the ``application_id`` option obligatorily. Incompatible with ``auth_path`` option.
-
-+--------------------+--------------------+
-| **Default value**  | N/A                |
-+--------------------+--------------------+
-| **Allowed values** | Any string         |
-+--------------------+--------------------+
-
 graph\\auth_path
 ^^^^^^^^^^^^^^^^
 
-Path of the file that contains the application identifier and the application key for authentication in order to use the AAD Graph API. Incompatible with the ``application_id`` and ``application_key`` options. Check the :doc:`credentials </azure/activity-services/prerequisites/credentials>` reference for more information about this topic.
+Path of the file that contains the application identifier and the application key for authentication in order to use the AAD Graph API.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -604,8 +529,6 @@ storage
 
 This block configures the integration with Azure Storage.
 
-- `storage\\account_name`_
-- `storage\\account_key`_
 - `storage\\auth_path`_
 - `storage\\tag`_
 - `storage\\container`_
@@ -613,10 +536,6 @@ This block configures the integration with Azure Storage.
 +----------------------------------+----------------------------------------------+
 | Options                          | Allowed values                               |
 +==================================+==============================================+
-| `storage\\account_name`_         | Any string                                   |
-+----------------------------------+----------------------------------------------+
-| `storage\\account_key`_          | Any string                                   |
-+----------------------------------+----------------------------------------------+
 | `storage\\auth_path`_            | File path                                    |
 +----------------------------------+----------------------------------------------+
 | `storage\\tag`_                  | Any string                                   |
@@ -624,32 +543,10 @@ This block configures the integration with Azure Storage.
 | `storage\\container`_            | N/A                                          |
 +----------------------------------+----------------------------------------------+
 
-storage\\account_name
-^^^^^^^^^^^^^^^^^^^^^
-
-Identifier of the account name that we will use for the authentication- It must be used next to the ``account_key`` option obligatorily. Incompatible with ``auth_path`` option.
-
-+--------------------+--------------------+
-| **Default value**  | N/A                |
-+--------------------+--------------------+
-| **Allowed values** | Any string         |
-+--------------------+--------------------+
-
-storage\\account_key
-^^^^^^^^^^^^^^^^^^^^
-
-Identifier of the account key that we will use for the authentication- It must be used next to the ``account_name`` option obligatorily. Incompatible with ``auth_path`` option.
-
-+--------------------+--------------------+
-| **Default value**  | N/A                |
-+--------------------+--------------------+
-| **Allowed values** | Any string         |
-+--------------------+--------------------+
-
 storage\\auth_path
 ^^^^^^^^^^^^^^^^^^
 
-Path of the file that contains the account name and the account key for authentication. Incompatible with ``account_name`` and ``account_key`` options.
+Path of the file that contains the account name and the account key for authentication.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -812,8 +709,7 @@ Example of all integration
 
         <log_analytics>
 
-            <application_id>8b7...c14</application_id>
-            <application_key>w22...91x</application_key>
+            <auth_path>/var/ossec/wodles/azure/credentials</auth_path>
             <tenantdomain>wazuh.onmicrosoft.com</tenantdomain>
 
             <request>

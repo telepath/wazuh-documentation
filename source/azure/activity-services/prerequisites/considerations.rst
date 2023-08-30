@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn considerations for configuring multiple services with the Wazuh Azure module in this section of the Wazuh documentation. 
+  :description: Learn considerations for configuring multiple services with the Wazuh Azure module in this section of the Wazuh documentation.
 
 .. _azure_considerations:
 
@@ -40,8 +40,7 @@ It is possible to add more than one ``request`` block at the same time in the sa
         <run_on_start>yes</run_on_start>
 
         <log_analytics>
-            <application_id>8b7...c14</application_id>
-            <application_key>w22...91x</application_key>
+            <auth_path>/Azure/log_analytics_auth.txt</auth_path>
             <tenantdomain>wazuh.onmicrosoft.com</tenantdomain>
 
             <request>
